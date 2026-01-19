@@ -1,0 +1,6 @@
+a=$(mktemp)
+b=$(mktemp)
+/usr/sbin/checker $1 > $a
+/usr/sbin/generator $2 > $b
+diff $a $b
+rm $a $b
