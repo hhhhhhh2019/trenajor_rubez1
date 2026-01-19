@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" href="/xterm.css"/>
+		<script src="/xterm.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+
+		<link rel="stylesheet" href="/index.css"/>
+		<script src="/index.js"></script>
+	</head>
+
+	<body>
+		<p>Первое задание</p>
+		<div id="first_task" class="flex horiz_margin">
+			<div id="first_task_control">
+				<input id="variant" placeholder="вариант"/>
+				<button onclick="first_task.generate()">сгенерировать задание</button>
+				<p class="full_width keep_ws" id="first_task_text">Lorem Ipsum</p>
+			</div>
+			<div id="terminal_control">
+				<div class="full_width" id="terminal"></div>
+				<div class="full_width grid">
+					<button onclick="auth()">подключиться к серверу</button>
+					<button onclick="first_task.check()">проверить правильность</button>
+					<p id="diff" class="keep_ws"></p>
+					<button onclick="logout()">выйти из пользователя</button>
+				</div>
+			</div>
+		</div>
+
+		<p>Второе задание</p>
+		<div id="second_task">
+			<button onclick="second_task.generate()">сгенерировать задание</button><br>
+
+			<label>A:</label>
+			<input id="numA" readonly/><br>
+			<label>B:</label>
+			<input id="numB" readonly/><br>
+
+			<label>A в десятичной:</label>
+			<input id="numAd"/>
+			<label id="numAdOk"></label>
+			<br>
+			<label>B в десятичной:</label>
+			<input id="numBd"/>
+			<label id="numBdOk"></label>
+			<br>
+
+			<label>A + B:</label>
+			<input id="sum"/>
+			<label id="sumOk"></label>
+			<br>
+			<label>carry:</label>
+			<input id="flagC"/>
+			<label id="flagCOk"></label>
+			<br>
+			<label>overflow:</label>
+			<input id="flagV"/>
+			<label id="flagVOk"></label>
+			<br>
+
+			<button onclick="second_task.check()">проверка</button>
+		</div>
+	</body>
+</html>

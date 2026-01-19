@@ -1,0 +1,40 @@
+* {
+	font-family: monospace;
+}
+
+.full_width {
+	width: 100%;
+}
+
+.flex {
+	display: flex;
+}
+
+.horiz_margin {
+	column-gap: 3dvi;
+}
+
+.grid {
+	display: grid;
+}
+
+.keep_ws {
+	white-space: pre;
+}
+
+button {
+	padding: 0.5dvi;
+}
+
+#first_task {
+	padding-left: 5dvi;
+	padding-right: 10dvi;
+}
+
+#first_task_control {
+	width: 50%;
+}
+
+#terminal_control {
+	width: 50%;
+}
