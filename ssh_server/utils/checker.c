@@ -10,9 +10,9 @@
 #include <dirent.h>
 
 
-#define INDENT          "    "
-#define INDENT_LAST     "    "
-#define INDENT_LAST_DIR "    "
+#define INDENT          "|   "
+#define INDENT_LAST     "|   "
+#define INDENT_LAST_DIR "|   +"
 
 
 struct Node {
@@ -142,8 +142,10 @@ void print_node(struct Node node, int level) {
 	for (int i = 0; i < level - 1; i++) {
 		printf(INDENT);
 	}
-	if (level != 0)
-		printf(INDENT_LAST_DIR);
+	if (level != 0) {
+		if (node.is_dir) printf(INDENT_LAST_DIR);
+		else printf(INDENT_LAST);
+	}
 
 	print_permissions(node.perms);
 

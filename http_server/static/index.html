@@ -5,6 +5,7 @@
 
 		<link rel="stylesheet" href="/xterm.css"/>
 		<script src="/xterm.js"></script>
+		<script src="/xterm-addon-web-fonts.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 
 		<link rel="stylesheet" href="/index.css"/>
@@ -35,15 +36,15 @@
 			<button onclick="second_task.generate()">сгенерировать задание</button><br>
 
 			<label>A:</label>
-			<input id="numA" readonly/><br>
+			<input id="numA"/><br>
 			<label>B:</label>
-			<input id="numB" readonly/><br>
+			<input id="numB"/><br>
 
-			<label>A в десятичной:</label>
+			<label>A в шестнадцатеричке:</label>
 			<input id="numAd"/>
 			<label id="numAdOk"></label>
 			<br>
-			<label>B в десятичной:</label>
+			<label>B в шестнадцатеричке:</label>
 			<input id="numBd"/>
 			<label id="numBdOk"></label>
 			<br>

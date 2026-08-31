@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
 	flagV  = document.getElementById("flagV");
 	flagVOk  = document.getElementById("flagVOk");
 
-	term = new Terminal({cursorBlink: true});
+	term = new Terminal({cursorBlink: true, fontFamily: 'monospace'});
 	term.open(document.getElementById('terminal'));
 
 	socket = io.connect();
@@ -45,6 +45,7 @@ window.addEventListener("load", () => {
 
 		// Browser -> Backend
 		term.onData((data) => {
+			console.log(data);
 			socket.emit('data', data);
 		});
 
@@ -94,6 +95,13 @@ const unsigned2signed = (n) => {
 }
 
 
+const signed2unsigned = (n) => {
+	if (n >= 0)
+		return n;
+	return 65536 + n;
+}
+
+
 const first_task = {
 	generate: () => socket.emit("generate", {
 		token,
@@ -109,21 +117,28 @@ const first_task = {
 
 const second_task = {
 	generate: () => {
-		numA.value = Math.floor(Math.random() * 65536).toString(16);
-		numB.value = Math.floor(Math.random() * 65536).toString(16);
+		numA.value = Math.floor(Math.random() * 65536) - 32768;
+		numB.value = Math.floor(Math.random() * 65536) - 32768;
 	},
 
 	check: () => {
-		const a = parseInt(numA.value, 16);
-		const b = parseInt(numB.value, 16);
+		const a = parseInt(numA.value, 10);
+		const b = parseInt(numB.value, 10);
+
+		const ua = signed2unsigned(a);
+		const ub = signed2unsigned(b);
+
+		const ad = parseInt(numAd.value, 16);
+		const bd = parseInt(numBd.value, 16);
+
 		const sumv = parseInt(sum.value, 16);
-		const c = (a + b) > 65535;
-		const pc = (a & 32767) + (b & 32767) > 32767;
+		const c = (ua + ub) > 65535;
+		const pc = (ua & 32767) + (ub & 32767) > 32767;
 		const v = c ^ pc;
 
-		numAdOk.innerText = unsigned2signed(a) == numAd.value ? 1 : 0
-		numBdOk.innerText = unsigned2signed(b) == numBd.value ? 1 : 0
-		sumOk.innerText = (a + b) % 65536 == sumv ? 1 : 0
+		numAdOk.innerText = ua == ad ? 1 : 0;
+		numBdOk.innerText = ub == bd ? 1 : 0;
+		sumOk.innerText = (ua + ub) % 65536 == sumv ? 1 : 0;
 		flagCOk.innerText = c == flagC.value ? 1 : 0;
 		flagVOk.innerText = v == flagV.value ? 1 : 0;
 	}

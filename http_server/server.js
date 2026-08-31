@@ -95,6 +95,13 @@ const getRoutingTable = {
 		res.write(readFile("./node_modules/@xterm/xterm/lib/xterm.js"));
 		res.end();
 	},
+	"/xterm-addon-web-fonts.js": (req, res) => {
+		res.writeHead(200, {
+			"Content-Type": "text/javascript"
+		});
+		res.write(readFile("./node_modules/@xterm/addon-web-fonts/lib/addon-web-fonts.js"));
+		res.end();
+	},
 	"/xterm.css": (req, res) => {
 		res.writeHead(200, {
 			"Content-Type": "text/css"
