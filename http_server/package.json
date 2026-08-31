@@ -2,9 +2,12 @@
   "name": "rubez",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
+  "bin": {
+    "http_server": "./server.js"
+  },
   "scripts": {
-    "run": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

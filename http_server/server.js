@@ -1,8 +1,8 @@
 const port = 8080; // порт, на котором будет запущен http сервер
 const ssh_host = "localhost"; // хост на котором запущен ssh сервер
 const ssh_port = 8022;
-const generator_path = "/usr/sbin/generator";
-const check_path = "/usr/sbin/check";
+const generator_path = "/sbin/generator";
+const check_path = "/sbin/check";
 
 import { Client } from 'ssh2'
 import { Server } from 'socket.io'
@@ -10,6 +10,7 @@ import { createServer } from 'http'
 import { readFileSync } from 'fs'
 import { URL } from 'url'
 import { parse } from 'querystring'
+import { join } from 'path'
 
 
 const users = {};
@@ -44,6 +45,7 @@ const parseCookie = (str) => {
 const staticCache = {};
 
 const readFile = (filename) => {
+  filename = join(import.meta.dirname, filename);
 	// if (filename in staticCache)
 	// 	return staticCache[filename];
 
@@ -92,21 +94,21 @@ const getRoutingTable = {
 		res.writeHead(200, {
 			"Content-Type": "text/javascript"
 		});
-		res.write(readFile("./node_modules/@xterm/xterm/lib/xterm.js"));
+		res.write(readFile("node_modules/@xterm/xterm/lib/xterm.js"));
 		res.end();
 	},
 	"/xterm-addon-web-fonts.js": (req, res) => {
 		res.writeHead(200, {
 			"Content-Type": "text/javascript"
 		});
-		res.write(readFile("./node_modules/@xterm/addon-web-fonts/lib/addon-web-fonts.js"));
+		res.write(readFile("node_modules/@xterm/addon-web-fonts/lib/addon-web-fonts.js"));
 		res.end();
 	},
 	"/xterm.css": (req, res) => {
 		res.writeHead(200, {
 			"Content-Type": "text/css"
 		});
-		res.write(readFile("./node_modules/@xterm/xterm/css/xterm.css"));
+		res.write(readFile("node_modules/@xterm/xterm/css/xterm.css"));
 		res.end();
 	},
 };

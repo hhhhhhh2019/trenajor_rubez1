@@ -63,7 +63,7 @@ window.addEventListener("load", () => {
 		});
 
 		socket.on('diff', (data) => {
-			diff.innerText = data;
+			diff.innerText += data;
 		});
 
 		socket.on('report_error', (data) => {
@@ -108,10 +108,13 @@ const first_task = {
 		variant: variant.value
 	}),
 
-	check: () => socket.emit("check", {
-		token,
-		variant: variant.value
-	})
+	check: () => {
+    diff.innerText = "";
+    socket.emit("check", {
+      token,
+      variant: variant.value
+    });
+  }
 };
 
 
