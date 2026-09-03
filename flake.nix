@@ -131,7 +131,7 @@
     users = {
       user = {
         uid = 1000; # когда-нибудь я сделаю автоматическую нумерацию, а пока увеличивайте это число сами каждый раз
-        shadow = "$6$6t9WB8SC6vCOS41Z$jWdvA/cuZ7grsBA8bSCf8TWpyOnjZMuFElTlfsp8acHZPtxzvpvxJ0Xxx26XwkMs4KqtPsax0o3kaDN6cL4Fr/"; # тут результат команды mkpasswd -m sha512crypt <пароль>
+        shadow = "$6$6t9WB8SC6vCOS41Z$jWdvA/cuZ7grsBA8bSCf8TWpyOnjZMuFElTlfsp8acHZPtxzvpvxJ0Xxx26XwkMs4KqtPsax0o3kaDN6cL4Fr/"; # тут результат команды mkpasswd -m sha512crypt <пароль>, это если что 123
       };
     };
 
