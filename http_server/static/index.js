@@ -59,7 +59,7 @@ window.addEventListener("load", () => {
 		});
 
 		socket.on('task', (data) => {
-			first_task_text.innerText = data;
+			first_task_text.innerText += data;
 		});
 
 		socket.on('diff', (data) => {
@@ -103,18 +103,21 @@ const signed2unsigned = (n) => {
 
 
 const first_task = {
-	generate: () => socket.emit("generate", {
-		token,
-		variant: variant.value
-	}),
+	generate: () => {
+		first_task_text.innerText = "";
+		socket.emit("generate", {
+			token,
+			variant: variant.value
+		});
+	},
 
 	check: () => {
-    diff.innerText = "";
-    socket.emit("check", {
-      token,
-      variant: variant.value
-    });
-  }
+		diff.innerText = "";
+		socket.emit("check", {
+			token,
+			variant: variant.value
+		});
+	}
 };
 
 

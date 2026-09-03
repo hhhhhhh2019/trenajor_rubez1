@@ -105,6 +105,7 @@
         CONFIG_WC y
         CONFIG_DIFF y
         CONFIG_MKTEMP y
+        CONFIG_CHMOD y
 
         CONFIG_FEATURE_LS_FILETYPES y
         CONFIG_FEATURE_LS_FOLLOWLINKS y
@@ -152,6 +153,8 @@
         dontNpmBuild = true;
       };
 
+      inherit generator checker check;
+
       ssh = pkgs.dockerTools.buildLayeredImage {
         name = "ssh_server";
         tag = "latest";
@@ -160,7 +163,7 @@
 
           echo "export PATH=/bin" > etc/profile
 
-          cp "${busybox}"/bin/{sh,mkdir,echo,cat,touch,ls,more,cp,rm,rmdir,mv,wc,head,tail,sort,grep} bin
+          cp "${busybox}"/bin/{sh,mkdir,echo,cat,touch,ls,more,cp,rm,rmdir,mv,wc,head,tail,sort,grep,chmod} bin
           cp "${busybox}"/bin/* sbin
           cp "${dropbear}"/bin/{dropbear,dropbearkey} sbin
 
@@ -180,6 +183,8 @@
           cp "${checker}/bin/checker" sbin
           cp "${check}" sbin/check
 
+          #${pkgs.libcap}/bin/setcap CAP_DAC_OVERRIDE=ep sbin/checker
+
           chmod 700 .
           chmod 755 bin -R
           chmod 700 dev -R
@@ -197,6 +202,7 @@
           chmod 700 sbin/* -R
           chmod o+x sbin/generator
           chmod o+x sbin/checker
+          chmod u+s sbin/checker
           chmod o+rx sbin/check
           chmod o+x sbin/diff
           chmod o+x sbin/rm

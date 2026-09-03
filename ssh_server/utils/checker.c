@@ -116,6 +116,12 @@ struct Node readfile(char* path, char* filename) {
 
 	DIR* dir = opendir(basepath);
 
+	if (!dir) {
+		fprintf(stderr, "failed to read dir: %s\n", basepath);
+		perror("opendir");
+		exit(errno);
+	}
+
 	struct dirent* dirent;
 	while ((dirent = readdir(dir))) {
 		if (strcmp(dirent->d_name, ".") == 0)
